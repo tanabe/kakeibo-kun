@@ -87,9 +87,9 @@ var Application = (function() {
     for (var p in data) {
       var expenses = data[p];
       total += expenses;
-      $("#expenses" + this.capitalize(p) + " td").html(this.toCurrency(expenses));
+      $("#expenses" + this.capitalize(p) + " td").html(this.toCurrency(expenses) + "円");
     }
-    $("#expensesTotal td").html(this.toCurrency(total));
+    $("#expensesTotal td").html(this.toCurrency(total) + "円");
   };
 
   /**
