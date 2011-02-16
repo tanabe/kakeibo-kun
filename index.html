@@ -9,40 +9,44 @@
     <meta http-equiv="content-script-type" content="text/javascript">
     <meta http-equiv="content-style-type" content="text/css">
 
-    <style type="text/css">
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="css/kakeibo-kun.css">
     <script type="text/javascript" src="js/jquery-1.5.min.js"></script>
     <script type="text/javascript" src="js/kakeibo-kun.js"></script>
 
   </head>
   <body>
     <h1>家計簿くん</h1>
-
+    <ul>
+      <li><a href="javascript:Application.changeView('input')">input</a></li>
+      <li><a href="javascript:Application.changeView('detail')">detail</a></li>
+      <li><a href="javascript:Application.changeView('setting')">setting</a></li>
+    </ul>
     <div id="settingView">
       <h2>setting</h2>
+      <p><a href="./auth.pl">Google 認証</a></p>
       <p><label for="sheetKey">シートのキー</label><input type="text" name="sheetKey" id="sheetKey" maxlength="50" value=""></p>
       <p><button type="submit" id="setSheetKeyButton" class="button">設定</button></p>
-      <p><a href="./auth.pl">Google 認証</a></p>
     </div>
 
     <div id="detailView">
-      <table>
-        <tr><th>食費・生活費</th><td>123</td></tr>
-        <tr><th>趣味・娯楽費</th><td>123</td></tr>
-        <tr><th>光熱費</th><td>123</td></tr>
-        <tr><th>通信費</th><td>123</td></tr>
-        <tr><th>交通費</th><td>123</td></tr>
-        <tr><th>医療費</th><td>123</td></tr>
-        <tr><th>住宅費</th><td>123</td></tr>
-        <tr><th>貯蓄</th><td>123</td></tr>
-        <tr><th>その他</th><td>123</td></tr>
-        <tr><th>支出合計</th><td>123</td></tr>
+      <h2>detail</h2>
+      <p><button type="button" id="loadJSONButton" class="button">load JSON</button></p>
+      <table id="expensesTable">
+        <tr id="expensesLiving"><th>食費・生活費</th><td></td></tr>
+        <tr id="expensesPleasure"><th>趣味・娯楽費</th><td></td></tr>
+        <tr id="expensesLight_heat"><th>光熱費</th><td></td></tr>
+        <tr id="expensesNetwork"><th>通信費</th><td></td></tr>
+        <tr id="expensesTransport"><th>交通費</th><td></td></tr>
+        <tr id="expensesMedical"><th>医療費</th><td></td></tr>
+        <tr id="expensesHousing"><th>住宅費</th><td></td></tr>
+        <tr id="expensesSaving"><th>貯蓄</th><td></td></tr>
+        <tr id="expensesEtc"><th>その他</th><td></td></tr>
+        <tr id="expensesTotal"><th>支出合計</th><td></td></tr>
       </table>
     </div>
 
-    <div id="mainView">
-      <h2>x月の支出: 12,345 円</h2>
+    <div id="inputView">
+      <h2>input</h2>
       <p><label for="date">日付</label><input type="tel" name="date" id="date" maxlength="8" value=""></p>
       <p><label for="amount">金額</label><input type="tel" name="amount" id="amount" maxlength="6"></p>
       <p><label for="category">項目</label><input type="text" name="category" id="category"></p>

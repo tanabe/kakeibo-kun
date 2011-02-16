@@ -9,8 +9,8 @@ use Net::Google::AuthSub;
 use Net::Google::Spreadsheets;
 use JSON;
 
-print "Content-type: text/html;charset=utf-8\n\n";
-#print "Content-type: application/json;charset=utf-8\n\n";
+#print "Content-type: text/html;charset=utf-8\n\n";
+print "Content-type: application/json;charset=utf-8\n\n";
 
 my %cookies = fetch CGI::Cookie;
 my $session_token;

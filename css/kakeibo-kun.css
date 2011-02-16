@@ -1,0 +1,10 @@
+body {
+}
+
+#inputView, #detailView, #settingView {
+  display: none;
+}
+
+#inputView {
+  display: block;
+}
