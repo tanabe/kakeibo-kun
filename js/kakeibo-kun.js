@@ -72,6 +72,8 @@ var Application = (function() {
         memo: $("#memo").val()
     }, function(data) {
       self.hideLoadingScreen();
+      $("#amount").val("");
+      $("#memo").val("");
     });
   };
  

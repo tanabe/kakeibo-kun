@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use CGI;
-use CGI::Carp qw(fatalsToBrowser);
+#use CGI::Carp qw(fatalsToBrowser);
 use CGI::Cookie;
 use Net::Google::AuthSub;
 use Net::Google::Spreadsheets;

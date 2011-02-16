@@ -22,21 +22,34 @@
     </div>
 
     <ul id="menu">
-      <li><a href="javascript:Application.changeView('input')">input</a></li>
-      <li><a href="javascript:Application.changeView('detail')">detail</a></li>
-      <li><a href="javascript:Application.changeView('setting')">setting</a></li>
+      <li><a href="javascript:Application.changeView('input')">入力画面</a></li>
+      <li><a href="javascript:Application.changeView('detail')">支出一覧画面</a></li>
+      <li><a href="javascript:Application.changeView('setting')">設定画面</a></li>
     </ul>
 
+    <hr>
+
     <div id="settingView">
-      <h2>setting</h2>
-      <p><a href="./auth.pl">Google 認証</a></p>
+      <h2>設定画面</h2>
+      <h3>チュートリアル</h3>
+      <ol>
+        <li><a href="./sheet/kakeibo-kun-template.xls">テンプレート Excel をダウンロード</a>します</li>
+        <li><a href="http://docs.google.com/?hl=ja">Google ドキュメント</a>に Excel をアップロードします</li>
+        <li>Google ドキュメントで Excel を開いて、URL に含まれる key の値をコピーします</li>
+        <li>下のフォームに key の値をペーストして、設定ボタンを押します</li>
+        <li><a href="javascript:Application.changeView('input');">入力画面に移動します</a></li>
+      </ol>
       <p><label for="sheetKey">シートのキー</label><input type="text" name="sheetKey" id="sheetKey" maxlength="50" value=""></p>
       <p><button type="submit" id="setSheetKeyButton" class="button">設定</button></p>
+      <p>Google との認証が切れた場合は自動的に認証画面にリダイレクトしますが<br>、
+      うまく動かない場合は下のリンクから再認証してください。</p>
+      <p><a href="./auth.pl">Google 認証</a></p>
+      <p></p>
     </div>
 
     <div id="detailView">
-      <h2>detail</h2>
-      <p><button type="button" id="loadJSONButton" class="button">load JSON</button></p>
+      <h2>支出一覧画面</h2>
+      <p><button type="button" id="loadJSONButton" class="button">データを読み込む</button></p>
       <table id="expensesTable">
         <tr id="expensesLiving"><th>食費・生活費</th><td></td></tr>
         <tr id="expensesPleasure"><th>趣味・娯楽費</th><td></td></tr>
@@ -52,7 +65,7 @@
     </div>
 
     <div id="inputView">
-      <h2>input</h2>
+      <h2>入力画面</h2>
       <div>
         <label for="date" id="dateLabel">日付: </label>
         <select id="dateSelector"></select>日
@@ -76,7 +89,7 @@
       </div>
 <!--      <p><label for="category">項目</label><input type="text" name="category" id="category"></p>-->
       <p><label for="memo">メモ</label><input type="text" name="memo" id="memo"></p>
-      <p><button type="submit" id="addButton" class="button">ずどん</button></p>
+      <p><button type="submit" id="addButton" class="button">登録</button></p>
     </div>
   </body>
 </html>

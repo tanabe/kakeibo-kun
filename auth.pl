@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use CGI;
-use CGI::Carp qw(fatalsToBrowser);
+#use CGI::Carp qw(fatalsToBrowser);
 use CGI::Cookie;
 use Net::Google::AuthSub;
 
