@@ -16,11 +16,17 @@
   </head>
   <body>
     <h1>家計簿くん</h1>
-    <ul>
+
+    <div id="loadingScreen">
+      <p>loading...</p>
+    </div>
+
+    <ul id="menu">
       <li><a href="javascript:Application.changeView('input')">input</a></li>
       <li><a href="javascript:Application.changeView('detail')">detail</a></li>
       <li><a href="javascript:Application.changeView('setting')">setting</a></li>
     </ul>
+
     <div id="settingView">
       <h2>setting</h2>
       <p><a href="./auth.pl">Google 認証</a></p>
@@ -47,9 +53,28 @@
 
     <div id="inputView">
       <h2>input</h2>
-      <p><label for="date">日付</label><input type="tel" name="date" id="date" maxlength="8" value=""></p>
-      <p><label for="amount">金額</label><input type="tel" name="amount" id="amount" maxlength="6"></p>
-      <p><label for="category">項目</label><input type="text" name="category" id="category"></p>
+      <div>
+        <label for="date" id="dateLabel">日付: </label>
+        <select id="dateSelector"></select>日
+      </div>
+      <div>
+        <label for="amount">金額: </label><input type="tel" name="amount" id="amount" maxlength="6">
+      </div>
+      <div>
+        <label for="category">項目: </label>
+        <select id="categorySelector">
+          <option value="living">食費・生活費</option>
+          <option value="pleasure">趣味・娯楽費</option>
+          <option value="light_heat">光熱費</option>
+          <option value="network">通信費</option>
+          <option value="transport">交通費</option>
+          <option value="medical">医療費</option>
+          <option value="housing">住宅費</option>
+          <option value="saving">貯蓄</option>
+          <option value="etc">etc</option>
+        </select>
+      </div>
+<!--      <p><label for="category">項目</label><input type="text" name="category" id="category"></p>-->
       <p><label for="memo">メモ</label><input type="text" name="memo" id="memo"></p>
       <p><button type="submit" id="addButton" class="button">ずどん</button></p>
     </div>

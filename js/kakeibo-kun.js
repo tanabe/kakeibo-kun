@@ -52,8 +52,29 @@ var Application = (function() {
       {m: year + month },
       function(data) {
         self.renderExpenses(data);
+        self.hideLoadingScreen();
     });
   };
+
+  /**
+   *  post data
+   */
+  app.postData = function() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = ((101 + now.getMonth()) + "").substr(1, 2);
+    var self = this;
+    this.showLoadingScreen();
+    $.post("./set-data.pl", {
+        date: year + month + $("#dateSelector").val(),
+        category: $("#categorySelector").val(),
+        out: $("#amount").val(),
+        memo: $("#memo").val()
+    }, function(data) {
+      self.hideLoadingScreen();
+    });
+  };
+ 
 
   /**
    *  render expenses table
@@ -73,14 +94,14 @@ var Application = (function() {
    *  show loading screen
    */
   app.showLoadingScreen = function() {
-    //TODO
+    $("#loadingScreen").show();
   };
 
   /**
    *  hide loading screen
    */
   app.hideLoadingScreen = function() {
-    //TODO
+    $("#loadingScreen").hide();
   };
 
   /**
@@ -117,6 +138,27 @@ var Application = (function() {
     var result = new String(target).replace(/,/g, "");
     while (result != (result = result.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
     return result;
+  }
+
+  /**
+   *  initialize input form
+   */
+  app.initForm = function() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var date = now.getDate();
+    var totalDate = (new Date(year, now.getMonth(), 0)).getDate();
+
+    //date selector
+    $("#dateLabel").append(year + "年" + month + "月");
+    for (var i = 0; i < totalDate; i++) {
+      var value = i + 1;
+      var selected = (value === date) ? " selected" : "";
+      $("#dateSelector").append("<option value='" + value +"'" + selected + ">" + value + "</option>");
+    }
+
+    //category
   }
 
   /**
@@ -177,26 +219,22 @@ $(function() {
     Application.changeView("setting");
   }
 
-  $("#sheetKey").val(Application.getSpreadSheetKey());
-  $("#setSheetKeyButton").click(function(elem) {
-    Application.setSpreadSheetKey($("#sheetKey").val());
-  });
+  //input view form
+  Application.initForm();
 
-  //add button
+  //input view add button
   $("#addButton").click(function() {
-    $.post("./set-data.pl", {
-        date: $("#date").val(),
-        category: $("#category").val(),
-        out: $("#amount").val(),
-        memo: $("#memo").val()
-    }, function(data) {
-      //console.log(data);
-    });
+    Application.postData();
   });
 
-  //load button
+  //detail view load button
   $("#loadJSONButton").click(function() {
     Application.loadExpensesJSON();
   });
 
+  //setting view
+  $("#sheetKey").val(Application.getSpreadSheetKey());
+  $("#setSheetKeyButton").click(function(elem) {
+    Application.setSpreadSheetKey($("#sheetKey").val());
+  });
 });

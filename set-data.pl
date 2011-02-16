@@ -72,9 +72,18 @@ my @rows = $worksheet->rows({sq => '日付 != ""'});
 my $next_index = $#rows + 3;
 
 #add row
+my %categories = ('living' => '食費・生活費',
+                  'pleasure' =>, '趣味・娯楽費',
+                  'light_heat' => '光熱費',
+                  'network' => '通信費', 
+                  'transport' => '交通費',
+                  'medical' => '医療費',
+                  'housing' => '住宅費',
+                  'saving' => '貯蓄',
+                  'etc' => 'etc');
 $worksheet->batchupdate_cell(
   {col => 1, row => $next_index, input_value => "$yyyy-$mm-$dd"},
-  {col => 2, row => $next_index, input_value => "$category"},
+  {col => 2, row => $next_index, input_value => "$categories{$category}"},
   {col => 3, row => $next_index, input_value => "$out"},
   {col => 5, row => $next_index, input_value => "=MINUS(SUM(INDIRECT(ADDRESS(ROW()-1,COLUMN())), INDIRECT(ADDRESS(ROW(),COLUMN()-1))), INDIRECT(ADDRESS(ROW(),COLUMN()-2)))"},
   {col => 6, row => $next_index, input_value => "$memo"}

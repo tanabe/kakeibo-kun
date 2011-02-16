@@ -8,3 +8,17 @@ body {
 #inputView {
   display: block;
 }
+
+#loadingScreen {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#loadingScreen p {
+  margin: 0;
+  padding: 0;
+}
