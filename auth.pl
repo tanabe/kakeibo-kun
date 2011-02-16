@@ -14,7 +14,7 @@ if ($token) {
   my $session_token = $authsub->session_token;
   my $cookie = $cgi->cookie(-name   => 'gtoken',
                             -value  => $session_token,
-                            -expires=> '+1h');
+                            -expires=> '0');
   print $cgi->redirect(-uri => $cgi->url =~ /^(.*\/)/, -cookie => $cookie);
 } else {
   my $auth = Net::Google::AuthSub->new;
