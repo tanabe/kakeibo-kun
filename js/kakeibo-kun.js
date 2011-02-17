@@ -150,7 +150,7 @@ var Application = (function() {
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
     var date = now.getDate();
-    var totalDate = (new Date(year, now.getMonth(), 0)).getDate();
+    var totalDate = (new Date(year, now.getMonth() + 1, 0)).getDate();
 
     //date selector
     $("#dateLabel").append(year + "年" + month + "月");
