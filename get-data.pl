@@ -53,6 +53,7 @@ my $worksheet = $worksheets->worksheet({title => $yyyy . 'å¹´' . ($mm + 0) . 'æœ
 my %output;
 my @categories = ('living', 'pleasure', 'light_heat', 'network', 'transport', 'medical', 'housing', 'saving', 'etc');
 for (my $i = 0; $i < $#categories; $i++) {
+  #TODO trimming \ character and comma
   $output{$categories[$i]} = $worksheet->cell({col => 8, row => $i + 2})->content + 0;
 }
 
