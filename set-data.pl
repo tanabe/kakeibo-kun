@@ -84,7 +84,7 @@ my %categories = ('living' => '食費・生活費',
                   'medical' => '医療費',
                   'housing' => '住宅費',
                   'saving' => '貯蓄',
-                  'etc' => 'etc');
+                  'etc' => 'その他');
 $worksheet->batchupdate_cell(
   {col => 1, row => $next_index, input_value => "$yyyy-$mm-$dd"},
   {col => 2, row => $next_index, input_value => "$categories{$category}"},
