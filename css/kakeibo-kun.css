@@ -10,6 +10,10 @@ body {
   line-height: 1.2em;
 }
 
+a:link, a:visited, a:hover, a:active {
+  color: blue;
+}
+
 h1, h2, h3, h4, h5, h6, p {
   font-size: 1em;
   font-weight: normal;
@@ -26,7 +30,6 @@ ol, ul, li {
 button, input, select {
   font-size: 1em;
 }
-
 
 div.section {
   margin-bottom: 10px;
@@ -83,8 +86,8 @@ div.view div.content {
   padding: 5px;
 }
 
-/* screens */
-#loadingScreen, #messageScreen {
+/* screen */
+#messageScreen {
   width: 100%;
   display: none;
   position: absolute;
@@ -92,9 +95,12 @@ div.view div.content {
   background: rgba(0, 0, 0, 0.8);
 }
 
-#loadingScreen p {
-  margin: 0;
-  padding: 0;
+#messageScreen p.message {
+  padding: 10px;
+}
+
+#messageScreen span.progressIcon {
+  margin-right: 5px;
 }
 
 /* detail */

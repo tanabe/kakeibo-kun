@@ -11,18 +11,19 @@ var Application = (function() {
    */
   app.initialize = function() {
     var self = this;
-    //check google auth token
-    if (!this.getGoogleToken()) {
-      this.showMessage("Googleの認証画面へリダイレクト中...");
-      location.href = "./auth.pl";
-    }
 
     //check spread sheet key
     if (!this.getSpreadSheetKey()) {
       this.changeView("setting");
     } else {
-      //default is input view
-      this.changeView("detail");
+      //default view
+      this.changeView("input");
+    }
+
+    //check google auth token
+    if (!this.getGoogleToken()) {
+      this.showMessage("Googleの認証画面へリダイレクト中...");
+      location.href = "./auth.pl";
     }
 
     //input view form
@@ -164,7 +165,7 @@ var Application = (function() {
     var year = now.getFullYear();
     var month = ((101 + now.getMonth()) + "").substr(1, 2);
     var self = this;
-    this.showLoadingScreen();
+    this.showMessage("送信中...");
     $.post("./set-data.pl", {
         date: year + month + $("#dateSelector").val(),
         category: $("#categorySelector").val(),
@@ -205,15 +206,14 @@ var Application = (function() {
    *  show loading screen
    */
   app.showLoadingScreen = function() {
-    this.initScreenSize();
-    $("#loadingScreen").show();
+    this.showMessage("読込中...");
   };
 
   /**
    *  hide loading screen
    */
   app.hideLoadingScreen = function() {
-    $("#loadingScreen").hide();
+    this.hideMessage();
   };
 
   /**
@@ -284,7 +284,7 @@ var Application = (function() {
   app.showMessage = function(message) {
     this.initScreenSize();
     $("#messageScreen").show();
-    $("#messageScreen p.message").text(message);
+    $("#messageScreen p.message span.body").text(message);
   };
 
   /**
