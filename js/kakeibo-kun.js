@@ -196,7 +196,7 @@ var Application = (function() {
    *  initialize screen size
    */
   app.initScreenSize = function() {
-    var height = $("body").height();
+    var height = $("body").height() - $("h1").height();
     $("#loadingScreen").css("height", height + "px");
     $("#messageScreen").css("height", height + "px");
   };

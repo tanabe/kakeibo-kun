@@ -29,7 +29,7 @@
     <!-- menu -->
     <ul id="menu">
       <li class="input"><a href="javascript:Application.changeView('input')">入力</a></li>
-      <li class="detail"><a href="javascript:Application.changeView('detail')">支出一覧</a></li>
+      <li class="detail"><a href="javascript:Application.changeView('detail')">今月の支出</a></li>
       <li class="setting"><a href="javascript:Application.changeView('setting')">設定</a></li>
       <li class="help"><a href="javascript:Application.changeView('help')">ヘルプ</a></li>
     </ul>
@@ -61,7 +61,7 @@
           <label for="amount">金額: </label><input type="tel" name="amount" id="amount" maxlength="6">
         </div>
         <div class="section"><label for="memo">メモ: </label><input type="text" name="memo" id="memo" maxlength="20"></div>
-        <div class="section"><button type="button" id="sendButton" class="button">送信する</button></div>
+        <div class="section"><button type="submit" id="sendButton" class="button">送信する</button></div>
       </div>
     </div>
     <!-- /input -->
@@ -70,20 +70,25 @@
     <div id="detailView" class="view">
       <h2>支出一覧画面</h2>
       <div class="content">
-        <div><button type="button" id="loadJSONButton" class="button">データを読み込む</button></div>
-        <h3>今月の出費</h3>
-        <table id="expensesTable">
-          <tr id="expensesLiving"><th>食費・生活費</th><td>0円</td></tr>
-          <tr id="expensesPleasure"><th>趣味・娯楽費</th><td>0円</td></tr>
-          <tr id="expensesLight_heat"><th>光熱費</th><td>0円</td></tr>
-          <tr id="expensesNetwork"><th>通信費</th><td>0円</td></tr>
-          <tr id="expensesTransport"><th>交通費</th><td>0円</td></tr>
-          <tr id="expensesMedical"><th>医療費</th><td>0円</td></tr>
-          <tr id="expensesHousing"><th>住宅費</th><td>0円</td></tr>
-          <tr id="expensesSaving"><th>貯蓄</th><td>0円</td></tr>
-          <tr id="expensesEtc"><th>その他</th><td>0円</td></tr>
-          <tr id="expensesTotal"><th>支出合計</th><td>0円</td></tr>
-        </table>
+        <div class="section">
+          <button type="button" id="loadJSONButton" class="button">データを読み込む</button>
+        </div>
+
+        <div class="section">
+          <h3>今月の出費</h3>
+          <table id="expensesTable">
+            <tr id="expensesLiving"><th>食費・生活費</th><td>0円</td></tr>
+            <tr id="expensesPleasure"><th>趣味・娯楽費</th><td>0円</td></tr>
+            <tr id="expensesLight_heat"><th>光熱費</th><td>0円</td></tr>
+            <tr id="expensesNetwork"><th>通信費</th><td>0円</td></tr>
+            <tr id="expensesTransport"><th>交通費</th><td>0円</td></tr>
+            <tr id="expensesMedical"><th>医療費</th><td>0円</td></tr>
+            <tr id="expensesHousing"><th>住宅費</th><td>0円</td></tr>
+            <tr id="expensesSaving"><th>貯蓄</th><td>0円</td></tr>
+            <tr id="expensesEtc"><th>その他</th><td>0円</td></tr>
+            <tr id="expensesTotal"><th>支出合計</th><td>0円</td></tr>
+          </table>
+        </div>
       </div>
     </div>
     <!-- /detail -->
@@ -140,7 +145,7 @@
     <!-- /setting -->
 
 
-    <div id="footer">developed by <a href="http://twitter.com/tanabe/">@tanabe</a></div>
+    <div id="footer">作った人 <a href="http://twitter.com/tanabe/">@tanabe</a></div>
 
   </body>
 </html>

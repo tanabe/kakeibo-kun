@@ -53,6 +53,7 @@ h3 {
 ul#menu {
   border-top: 2px solid #bcf;
   background-color: #e3e9ff;
+  margin-bottom: 10px;
 }
 
 ul#menu li {
