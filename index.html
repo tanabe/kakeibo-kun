@@ -17,31 +17,33 @@
   <body>
     <h1>家計簿くん</h1>
 
+    <div id="messageScreen">
+      <p class="message"></p>
+    </div>
+
     <div id="loadingScreen">
       <p>loading...</p>
     </div>
 
-    <h2>メニュー</h2>
     <ul id="menu">
-      <li><a href="javascript:Application.changeView('input')">入力画面</a></li>
-      <li><a href="javascript:Application.changeView('detail')">支出一覧画面</a></li>
-      <li><a href="javascript:Application.changeView('setting')">設定画面</a></li>
+      <li class="input"><a href="javascript:Application.changeView('input')">入力画面</a></li>
+      <li class="detail"><a href="javascript:Application.changeView('detail')">支出一覧画面</a></li>
+      <li class="setting"><a href="javascript:Application.changeView('setting')">設定画面</a></li>
     </ul>
-
-    <hr>
 
     <div id="settingView">
       <h2>設定画面</h2>
       <h3>チュートリアル</h3>
       <ol>
-        <li><a href="./sheet/kakeibo-kun-template.xls">テンプレート Excel をダウンロード</a>します。</li>
-        <li><a href="http://docs.google.com/?hl=ja">Google ドキュメント</a>に Excel をアップロードします。</li>
-        <li>Google ドキュメントで Excel を開いて、URL に含まれる key の値をコピーします。</li>
-        <li>下のフォームに key の値をペーストして、設定ボタンを押します。</li>
+        <li><a href="./sheet/kakeibo-kun-template.xls">テンプレートExcelをダウンロード</a>します。</li>
+        <li><a href="http://docs.google.com/?hl=ja">Googleドキュメント</a>にExcelをアップロードします。</li>
+        <li>GoogleドキュメントでExcelを開いて、URLをコピーします。</li>
+        <li>下のフォームにURLの値をペーストして、設定ボタンを押します。</li>
         <li><a href="javascript:Application.changeView('input');">入力画面に移動します。</a></li>
       </ol>
-      <p><label for="sheetKey">シートのキー</label><input type="text" name="sheetKey" id="sheetKey" maxlength="50" value=""></p>
+      <p><label for="sheetKeyInput">シートのURL: </label><input type="text" name="sheetKeyInput" id="sheetKeyInput" value=""></p>
       <p><button type="submit" id="setSheetKeyButton" class="button">設定</button></p>
+      <p>シートのキー: <span id="sheetKey">未設定</span></p>
       <p>Google との認証が切れた場合は自動的に認証画面にリダイレクトしますが、<br>
       うまく動かない場合は下のリンクから再認証してください。</p>
       <p><a href="./auth.pl">Google 認証</a></p>

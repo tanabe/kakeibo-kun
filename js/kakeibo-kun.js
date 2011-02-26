@@ -7,6 +7,47 @@ var Application = (function() {
   app.SHEET_COOKIE_KEY = "sheetKey";
 
   /**
+   *  initialize
+   */
+  app.initialize = function() {
+    var self = this;
+    //check google auth token
+    if (!this.getGoogleToken()) {
+      this.showMessage("Googleの認証画面へリダイレクト中...");
+      location.href = "./auth.pl";
+    }
+
+    //check spread sheet key
+    if (!this.getSpreadSheetKey()) {
+      this.changeView("setting");
+    } else {
+      //default input view
+      this.changeView("input");
+    }
+
+    //input view form
+    this.initForm();
+
+    //input view add button
+    $("#addButton").click(function() {
+      self.postData();
+    });
+
+    //detail view load button
+    $("#loadJSONButton").click(function() {
+      self.loadExpensesJSON();
+    });
+
+    //setting view
+    $("#sheetKey").text(this.getSpreadSheetKey());
+    $("#setSheetKeyButton").click(function(elem) {
+      var spreadSheetKey = $("#sheetKeyInput").val().match(/\?key=([^&]+)/)[1];
+      self.setSpreadSheetKey(spreadSheetKey);
+      $("#sheetKey").text(self.getSpreadSheetKey());
+    });
+  };
+
+  /**
    *  get google auth token
    *  @return token auth token
    */
@@ -114,7 +155,11 @@ var Application = (function() {
     var views = ["setting", "input", "detail"];
     for (var i = 0; i < views.length; i++) {
       $("#" + views[i] + "View").hide();
+      //menu item
+      $("ul#menu li." + views[i]).removeClass("current");
     }
+    //menu item
+    $("ul#menu li." + view).addClass("current");
     var viewId = "#" + view + "View";
     $(viewId).show();
   };
@@ -161,7 +206,23 @@ var Application = (function() {
     }
 
     //category
-  }
+  };
+
+  /**
+   *  show message screen
+   *  @message message
+   */
+  app.showMessage = function(message) {
+    $("#messageScreen").show();
+    $("#messageScreen p.message").text(message);
+  };
+
+  /**
+   *  hide message screen
+   */
+  app.hideMessage = function() {
+    $("#messageScreen").hide();
+  };
 
   /**
    *  Cookie Utility
@@ -211,32 +272,5 @@ var Application = (function() {
  *  entry point
  */
 $(function() {
-  //check google auth token
-  if (!Application.getGoogleToken()) {
-    location.href = "./auth.pl";
-  }
-
-  //check spread sheet key
-  if (!Application.getSpreadSheetKey()) {
-    Application.changeView("setting");
-  }
-
-  //input view form
-  Application.initForm();
-
-  //input view add button
-  $("#addButton").click(function() {
-    Application.postData();
-  });
-
-  //detail view load button
-  $("#loadJSONButton").click(function() {
-    Application.loadExpensesJSON();
-  });
-
-  //setting view
-  $("#sheetKey").val(Application.getSpreadSheetKey());
-  $("#setSheetKeyButton").click(function(elem) {
-    Application.setSpreadSheetKey($("#sheetKey").val());
-  });
+  Application.initialize();
 });

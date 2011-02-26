@@ -1,4 +1,57 @@
 body {
+  margin: 0;
+  padding: 0;
+  width: 320px;
+  background-color: #fff;
+  color: #000;
+  font-family: "ヒラギノ角ゴ Pro W3", "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  font-weight: normal;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+h2 {
+  display: none;
+}
+
+ul#menu {
+  border-top: 2px solid #bcf;
+  background-color: #e3e9ff;
+  margin-bottom: 10px;
+}
+
+ul#menu li {
+  padding: 5px;
+  display: inline-block;
+}
+
+ul#menu li a {
+  color: black;
+  text-decoration: none;
+}
+
+ul#menu li.current {
+  background-color: #68e;
+}
+
+ul#menu li.current a {
+  color: white;
 }
 
 #inputView, #detailView, #settingView {
@@ -9,7 +62,7 @@ body {
   display: block;
 }
 
-#loadingScreen {
+#loadingScreen, #messageScreen {
   display: none;
   position: absolute;
   width: 100%;
