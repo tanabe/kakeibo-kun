@@ -121,6 +121,14 @@ table#expensesTable td {
   text-align: center;
 }
 
+table#expensesTable tr#expensesTotal {
+  border-top: 5px #ccc double;
+}
+
+table#expensesTable tr#expensesTotal td {
+  font-weight: bold;
+}
+
 /* help */
 #helpView ol, 
 #helpView ul {
