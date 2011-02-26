@@ -23,7 +23,7 @@
     </div>
 
     <div id="loadingScreen">
-      <p>loading...</p>
+      <p>読込中...</p>
     </div>
 
     <!-- menu -->
@@ -34,6 +34,59 @@
       <li class="help"><a href="javascript:Application.changeView('help')">ヘルプ</a></li>
     </ul>
     <!-- /menu -->
+
+    <!-- input -->
+    <div id="inputView" class="view">
+      <h2>入力画面</h2>
+      <div class="content">
+        <div class="section">
+          <label for="date" id="dateLabel">日付: </label>
+          <span id="datePrefix"></span><select id="dateSelector"></select><span id="dateSuffix"></span>
+        </div>
+        <div class="section">
+          <label for="category">項目: </label>
+          <select id="categorySelector">
+            <option value="living">食費・生活費</option>
+            <option value="pleasure">趣味・娯楽費</option>
+            <option value="light_heat">光熱費</option>
+            <option value="network">通信費</option>
+            <option value="transport">交通費</option>
+            <option value="medical">医療費</option>
+            <option value="housing">住宅費</option>
+            <option value="saving">貯蓄</option>
+            <option value="etc">その他</option>
+          </select>
+        </div>
+        <div class="section">
+          <label for="amount">金額: </label><input type="tel" name="amount" id="amount" maxlength="6">
+        </div>
+        <div class="section"><label for="memo">メモ: </label><input type="text" name="memo" id="memo" maxlength="20"></div>
+        <div class="section"><button type="button" id="sendButton" class="button">送信する</button></div>
+      </div>
+    </div>
+    <!-- /input -->
+
+    <!-- detail -->
+    <div id="detailView" class="view">
+      <h2>支出一覧画面</h2>
+      <div class="content">
+        <div><button type="button" id="loadJSONButton" class="button">データを読み込む</button></div>
+        <h3>今月の出費</h3>
+        <table id="expensesTable">
+          <tr id="expensesLiving"><th>食費・生活費</th><td>0円</td></tr>
+          <tr id="expensesPleasure"><th>趣味・娯楽費</th><td>0円</td></tr>
+          <tr id="expensesLight_heat"><th>光熱費</th><td>0円</td></tr>
+          <tr id="expensesNetwork"><th>通信費</th><td>0円</td></tr>
+          <tr id="expensesTransport"><th>交通費</th><td>0円</td></tr>
+          <tr id="expensesMedical"><th>医療費</th><td>0円</td></tr>
+          <tr id="expensesHousing"><th>住宅費</th><td>0円</td></tr>
+          <tr id="expensesSaving"><th>貯蓄</th><td>0円</td></tr>
+          <tr id="expensesEtc"><th>その他</th><td>0円</td></tr>
+          <tr id="expensesTotal"><th>支出合計</th><td>0円</td></tr>
+        </table>
+      </div>
+    </div>
+    <!-- /detail -->
 
     <!-- help -->
     <div id="helpView" class="view">
@@ -61,7 +114,6 @@
     </div>
     <!-- /help -->
 
-
     <!-- setting -->
     <div id="settingView" class="view">
       <h2>設定画面</h2>
@@ -87,53 +139,6 @@
     </div>
     <!-- /setting -->
 
-    <!-- detail -->
-    <div id="detailView" class="view">
-      <h2>支出一覧画面</h2>
-      <p><button type="button" id="loadJSONButton" class="button">データを読み込む</button></p>
-      <table id="expensesTable">
-        <tr id="expensesLiving"><th>食費・生活費</th><td></td></tr>
-        <tr id="expensesPleasure"><th>趣味・娯楽費</th><td></td></tr>
-        <tr id="expensesLight_heat"><th>光熱費</th><td></td></tr>
-        <tr id="expensesNetwork"><th>通信費</th><td></td></tr>
-        <tr id="expensesTransport"><th>交通費</th><td></td></tr>
-        <tr id="expensesMedical"><th>医療費</th><td></td></tr>
-        <tr id="expensesHousing"><th>住宅費</th><td></td></tr>
-        <tr id="expensesSaving"><th>貯蓄</th><td></td></tr>
-        <tr id="expensesEtc"><th>その他</th><td></td></tr>
-        <tr id="expensesTotal"><th>支出合計</th><td></td></tr>
-      </table>
-    </div>
-    <!-- /detail -->
-
-    <!-- input -->
-    <div id="inputView" class="view">
-      <h2>入力画面</h2>
-      <div>
-        <label for="date" id="dateLabel">日付: </label>
-        <select id="dateSelector"></select>日
-      </div>
-      <div>
-        <label for="amount">金額: </label><input type="tel" name="amount" id="amount" maxlength="6">
-      </div>
-      <div>
-        <label for="category">項目: </label>
-        <select id="categorySelector">
-          <option value="living">食費・生活費</option>
-          <option value="pleasure">趣味・娯楽費</option>
-          <option value="light_heat">光熱費</option>
-          <option value="network">通信費</option>
-          <option value="transport">交通費</option>
-          <option value="medical">医療費</option>
-          <option value="housing">住宅費</option>
-          <option value="saving">貯蓄</option>
-          <option value="etc">その他</option>
-        </select>
-      </div>
-      <p><label for="memo">メモ</label><input type="text" name="memo" id="memo"></p>
-      <p><button type="submit" id="addButton" class="button">登録</button></p>
-    </div>
-    <!-- /input -->
 
     <div id="footer">developed by <a href="http://twitter.com/tanabe/">@tanabe</a></div>
 

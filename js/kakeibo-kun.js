@@ -21,16 +21,20 @@ var Application = (function() {
     if (!this.getSpreadSheetKey()) {
       this.changeView("setting");
     } else {
-      //default input view
-      this.changeView("setting");
+      //default is input view
+      this.changeView("detail");
     }
 
     //input view form
-    this.initForm();
+    this.initInputForm();
 
-    //input view add button
-    $("#addButton").click(function() {
-      self.postData();
+    //input view send button
+    $("#sendButton").click(function() {
+      if (self.validateInputValue()) {
+        self.postData();
+      } else {
+        alert("入力された金額が正しくありません");
+      }
     });
 
     //detail view load button
@@ -64,6 +68,18 @@ var Application = (function() {
     this.setSpreadSheetKey("");
     this.setGoogleToken("");
     $("#sheetKey").text("未設定");
+  };
+
+  /**
+   *  validate input value
+   */
+  app.validateInputValue = function() {
+    var result = false;
+    var pattern = /^\d+$/;
+    if (pattern.test($("#amount").val())) {
+      result = true;
+    }
+    return result;
   };
 
   /**
@@ -177,9 +193,19 @@ var Application = (function() {
   };
 
   /**
+   *  initialize screen size
+   */
+  app.initScreenSize = function() {
+    var height = $("body").height();
+    $("#loadingScreen").css("height", height + "px");
+    $("#messageScreen").css("height", height + "px");
+  };
+
+  /**
    *  show loading screen
    */
   app.showLoadingScreen = function() {
+    this.initScreenSize();
     $("#loadingScreen").show();
   };
 
@@ -233,22 +259,22 @@ var Application = (function() {
   /**
    *  initialize input form
    */
-  app.initForm = function() {
+  app.initInputForm = function() {
     var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
     var date = now.getDate();
+    //var day = ["日", "月", "火", "水", "木", "金", "土"][now.getDay()];
     var totalDate = (new Date(year, now.getMonth() + 1, 0)).getDate();
 
     //date selector
-    $("#dateLabel").append(year + "年" + month + "月");
+    $("#datePrefix").html(year + "年" + month + "月");
+    $("#dateSuffix").html("日");
     for (var i = 0; i < totalDate; i++) {
       var value = i + 1;
       var selected = (value === date) ? " selected" : "";
       $("#dateSelector").append("<option value='" + value +"'" + selected + ">" + value + "</option>");
     }
-
-    //category
   };
 
   /**
@@ -256,6 +282,7 @@ var Application = (function() {
    *  @message message
    */
   app.showMessage = function(message) {
+    this.initScreenSize();
     $("#messageScreen").show();
     $("#messageScreen p.message").text(message);
   };

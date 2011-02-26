@@ -1,3 +1,4 @@
+/* common */
 body {
   margin: 0;
   padding: 0;
@@ -6,7 +7,7 @@ body {
   color: #000;
   font-family: "ヒラギノ角ゴ Pro W3", "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
   font-size: 1.3em;
-  line-height: 1.3em;
+  line-height: 1.2em;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -22,7 +23,10 @@ ol, ul, li {
   margin: 0;
 }
 
-/** **/
+button, input, select {
+  font-size: 1em;
+}
+
 
 div.section {
   margin-bottom: 10px;
@@ -80,10 +84,9 @@ div.view div.content {
 
 /* screens */
 #loadingScreen, #messageScreen {
+  width: 100%;
   display: none;
   position: absolute;
-  width: 100%;
-  height: 100%;
   color: white;
   background: rgba(0, 0, 0, 0.8);
 }
@@ -91,6 +94,30 @@ div.view div.content {
 #loadingScreen p {
   margin: 0;
   padding: 0;
+}
+
+/* detail */
+table#expensesTable {
+  width: 308px;
+  border: 1px #ccc solid;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table#expensesTable th {
+  padding: 5px;
+  border: #ccc solid;
+  border-width: 0 0 1px 1px;
+  background: #eee;
+  font-weight: bold;
+  text-align: center;
+}
+
+table#expensesTable td {
+  padding: 5px;
+  border: 1px #ccc solid;
+  border-width: 0 0 1px 1px;
+  text-align: center;
 }
 
 /* help */
@@ -101,24 +128,21 @@ div.view div.content {
 
 #helpView ol li {
   list-style: decimal none outside;
-  margin-left: 2em;
-  margin-bottom: 5px;
 }
 
 #helpView ul li {
   list-style: disc none outside;
+}
+
+#helpView li {
+  font-size: 0.8em;
   margin-left: 2em;
   margin-bottom: 5px;
 }
 
 /* setting */
 #sheetKeyInput {
-  width: 100%;
-  font-size: 1em;
-}
-
-button {
-  font-size: 1em;
+  width: 80%;
 }
 
 p#sheetKey {
@@ -133,7 +157,9 @@ p#sheetKey.unset {
 
 /* footer */
 div#footer {
+  padding: 5px;
   text-align: center;
   border-top: 2px solid #bcf;
   background-color: #e3e9ff;
 }
+
