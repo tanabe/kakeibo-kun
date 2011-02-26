@@ -92,7 +92,7 @@ var Application = (function() {
       element.text(this.getSpreadSheetKey());
       element.removeClass("unset");
     } else {
-      element.text("未設定");
+      element.text("シートのキーが未設定です。");
       element.addClass("unset");
     }
   }
