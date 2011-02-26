@@ -68,7 +68,7 @@ var Application = (function() {
   app.resetSettings = function() {
     this.setSpreadSheetKey("");
     this.setGoogleToken("");
-    $("#sheetKey").text("未設定");
+    this.initSheetKeyInput();
   };
 
   /**
