@@ -39,13 +39,46 @@ var Application = (function() {
     });
 
     //setting view
-    $("#sheetKey").text(this.getSpreadSheetKey());
+    this.initSheetKeyInput();
     $("#setSheetKeyButton").click(function(elem) {
-      var spreadSheetKey = $("#sheetKeyInput").val().match(/\?key=([^&]+)/)[1];
-      self.setSpreadSheetKey(spreadSheetKey);
-      $("#sheetKey").text(self.getSpreadSheetKey());
+      var pattern = /\?key=([^&]+)/;
+      if (pattern.test($("#sheetKeyInput").val())) {
+        var spreadSheetKey = $("#sheetKeyInput").val().match(/\?key=([^&]+)/)[1];
+        self.setSpreadSheetKey(spreadSheetKey);
+        self.initSheetKeyInput();
+      } else {
+        alert("URLが正しくありません");
+      }
+    });
+    $("#resetButton").click(function() {
+      if (confirm("保存されている情報を削除しますか？")) {
+        self.resetSettings();
+      }
     });
   };
+
+  /**
+   *  reset setting
+   */
+  app.resetSettings = function() {
+    this.setSpreadSheetKey("");
+    this.setGoogleToken("");
+    $("#sheetKey").text("未設定");
+  };
+
+  /**
+   *  initialize sheet key input area
+   */
+  app.initSheetKeyInput = function() {
+    var element = $("#sheetKey");
+    if (this.getSpreadSheetKey()) {
+      element.text(this.getSpreadSheetKey());
+      element.removeClass("unset");
+    } else {
+      element.text("未設定");
+      element.addClass("unset");
+    }
+  }
 
   /**
    *  get google auth token
@@ -60,7 +93,11 @@ var Application = (function() {
    *  @param token auth token
    */
   app.setGoogleToken = function(token) {
-    app.cookieUtil.set(app.TOKEN_COOKIE_KEY, token);
+    if (!token) {
+      app.cookieUtil.del(app.TOKEN_COOKIE_KEY);
+    } else {
+      app.cookieUtil.set(app.TOKEN_COOKIE_KEY, token);
+    }
   };
 
   /**
@@ -69,7 +106,11 @@ var Application = (function() {
    *  ex) https://spreadsheets.google.com/ccc?key=xxxxxxxxxxx
    */
   app.setSpreadSheetKey = function(key) {
-    app.cookieUtil.set(app.SHEET_COOKIE_KEY, key);
+    if (!key) {
+      app.cookieUtil.del(app.SHEET_COOKIE_KEY);
+    } else {
+      app.cookieUtil.set(app.SHEET_COOKIE_KEY, key);
+    }
   };
 
   /**

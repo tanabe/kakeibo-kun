@@ -13,7 +13,7 @@ use JSON;
 print "Content-type: application/json;charset=utf-8\n\n";
 
 #check referer
-if ($ENV{'HTTP_REFERER'} !~ /(\kakeibo-kun\.kaihatsubu\.com|\.localhost\/kakeibo-kun)\/$/) {
+if ($ENV{'HTTP_REFERER'} !~ /(\kakeibo\.kaihatsubu\.com|\.localhost\/kakeibo-kun)\/$/) {
   exit;
 }
 

@@ -66,11 +66,23 @@
     <div id="settingView" class="view">
       <h2>設定画面</h2>
       <div class="content">
-        <h3>シートのURL: </h3>
-        <p><input type="text" name="sheetKeyInput" id="sheetKeyInput" value=""></p>
-        <p><button type="submit" id="setSheetKeyButton" class="button">URLからスプレッドシートのkeyを取得</button></p>
-        <h3>保存されたシートのキー:</h3>
-        <p id="sheetKey">未設定</p>
+
+        <div class="section">
+          <h3>保存されているシートのキー:</h3>
+          <p id="sheetKey">未設定</p>
+        </div>
+
+        <div class="section">
+          <h3>シートのURL: </h3>
+          <p><input type="text" name="sheetKeyInput" id="sheetKeyInput" value=""></p>
+          <p><button type="button" id="setSheetKeyButton" class="button">シートのキーを設定する</button></p>
+        </div>
+
+        <div class="section">
+          <h3>リセット</h3>
+          <p><button type="button" id="resetButton" class="button">保存情報を削除する</button></p>
+        </div>
+
       </div>
     </div>
     <!-- /setting -->
@@ -123,7 +135,7 @@
     </div>
     <!-- /input -->
 
-    <div id="footer">developed by @tanabe</div>
+    <div id="footer">developed by <a href="http://twitter.com/tanabe/">@tanabe</a></div>
 
   </body>
 </html>

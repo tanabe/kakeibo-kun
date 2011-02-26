@@ -5,7 +5,7 @@ body {
   background-color: #fff;
   color: #000;
   font-family: "ヒラギノ角ゴ Pro W3", "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
-  font-size: 1em;
+  font-size: 1.3em;
   line-height: 1.3em;
 }
 
@@ -24,11 +24,15 @@ ol, ul, li {
 
 /** **/
 
+div.section {
+  margin-bottom: 10px;
+}
+
 h1 {
   font-size: 1.5em;
   text-align: center;
   font-weight: bold;
-  padding: 5px;
+  padding: 10px;
 }
 
 h2 {
@@ -38,6 +42,8 @@ h2 {
 h3 {
   font-weight: bold;
   margin: 10px 0;
+  padding-left: 5px;
+  border-left: 5px solid #68e;
 }
 
 ul#menu {
@@ -108,6 +114,11 @@ div.view div.content {
 /* setting */
 #sheetKeyInput {
   width: 100%;
+  font-size: 1em;
+}
+
+button {
+  font-size: 1em;
 }
 
 p#sheetKey {
@@ -116,3 +127,13 @@ p#sheetKey {
   border: 2px solid #bcf;
 }
 
+p#sheetKey.unset {
+  border: 2px solid red;
+}
+
+/* footer */
+div#footer {
+  text-align: center;
+  border-top: 2px solid #bcf;
+  background-color: #e3e9ff;
+}
