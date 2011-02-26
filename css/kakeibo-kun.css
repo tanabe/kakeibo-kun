@@ -83,7 +83,7 @@ div.view {
 }
 
 div.view div.content {
-  padding: 5px;
+  padding: 10px;
 }
 
 /* screen */
@@ -105,7 +105,7 @@ div.view div.content {
 
 /* detail */
 table#expensesTable {
-  width: 308px;
+  width: 300px;
   border: 1px #ccc solid;
   border-collapse: collapse;
   border-spacing: 0;
