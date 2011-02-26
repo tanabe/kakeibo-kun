@@ -22,7 +22,7 @@ var Application = (function() {
       this.changeView("setting");
     } else {
       //default input view
-      this.changeView("input");
+      this.changeView("setting");
     }
 
     //input view form
@@ -89,8 +89,10 @@ var Application = (function() {
     var month = ((101 + now.getMonth()) + "").substr(1, 2);
     var self = this;
     this.showLoadingScreen();
-    $.get("./get-data.pl",
-      {m: year + month },
+    $.post("./get-data.pl",
+      {
+        m: year + month
+      },
       function(data) {
         self.renderExpenses(data);
         self.hideLoadingScreen();
@@ -152,7 +154,7 @@ var Application = (function() {
    *  @param view type
    */
   app.changeView = function(view) {
-    var views = ["setting", "input", "detail"];
+    var views = ["setting", "input", "detail", "help"];
     for (var i = 0; i < views.length; i++) {
       $("#" + views[i] + "View").hide();
       //menu item

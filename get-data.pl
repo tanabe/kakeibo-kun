@@ -12,6 +12,16 @@ use JSON;
 #print "Content-type: text/html;charset=utf-8\n\n";
 print "Content-type: application/json;charset=utf-8\n\n";
 
+#check referer
+if ($ENV{'HTTP_REFERER'} !~ /(\kakeibo-kun\.kaihatsubu\.com|\.localhost\/kakeibo-kun)\/$/) {
+  exit;
+}
+
+#check method
+if ($ENV{'REQUEST_METHOD'} eq 'GET') {
+  exit;
+}
+
 my %cookies = fetch CGI::Cookie;
 my $session_token;
 my $sheet_key;

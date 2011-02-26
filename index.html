@@ -26,32 +26,57 @@
       <p>loading...</p>
     </div>
 
+    <!-- menu -->
     <ul id="menu">
-      <li class="input"><a href="javascript:Application.changeView('input')">入力画面</a></li>
-      <li class="detail"><a href="javascript:Application.changeView('detail')">支出一覧画面</a></li>
-      <li class="setting"><a href="javascript:Application.changeView('setting')">設定画面</a></li>
+      <li class="input"><a href="javascript:Application.changeView('input')">入力</a></li>
+      <li class="detail"><a href="javascript:Application.changeView('detail')">支出一覧</a></li>
+      <li class="setting"><a href="javascript:Application.changeView('setting')">設定</a></li>
+      <li class="help"><a href="javascript:Application.changeView('help')">ヘルプ</a></li>
     </ul>
+    <!-- /menu -->
 
-    <div id="settingView">
-      <h2>設定画面</h2>
-      <h3>チュートリアル</h3>
-      <ol>
-        <li><a href="./sheet/kakeibo-kun-template.xls">テンプレートExcelをダウンロード</a>します。</li>
-        <li><a href="http://docs.google.com/?hl=ja">Googleドキュメント</a>にExcelをアップロードします。</li>
-        <li>GoogleドキュメントでExcelを開いて、URLをコピーします。</li>
-        <li>下のフォームにURLの値をペーストして、設定ボタンを押します。</li>
-        <li><a href="javascript:Application.changeView('input');">入力画面に移動します。</a></li>
-      </ol>
-      <p><label for="sheetKeyInput">シートのURL: </label><input type="text" name="sheetKeyInput" id="sheetKeyInput" value=""></p>
-      <p><button type="submit" id="setSheetKeyButton" class="button">設定</button></p>
-      <p>シートのキー: <span id="sheetKey">未設定</span></p>
-      <p>Google との認証が切れた場合は自動的に認証画面にリダイレクトしますが、<br>
-      うまく動かない場合は下のリンクから再認証してください。</p>
-      <p><a href="./auth.pl">Google 認証</a></p>
-      <p></p>
+    <!-- help -->
+    <div id="helpView" class="view">
+      <h2>ヘルプ</h2>
+      <div class="content">
+        <h3>セットアップ(PC)</h3>
+        <ol>
+          <li>テンプレートExcelファイルを<a href="./sheet/kakeibo-kun-template.xls">ダウンロード</a>します。</li>
+          <li><a href="http://docs.google.com/?hl=ja" target="_blank">Googleドキュメント</a>にテンプレートExcelファイルをアップロードします。</li>
+        </ol>
+        <h3>セットアップ(iPhone)</h3>
+        <ol>
+          <li><a href="http://docs.google.com/?hl=ja" target="_blank">Googleドキュメント</a>でテンプレートExcelを開いて、URLをコピーします。</li>
+          <li><a href="javascript:Application.changeView('setting');">設定画面</a>のフォームにURLをペーストして、設定ボタンを押します。スプレッドシートのkeyがcookieに保存されます。</li>
+          <li><a href="javascript:Application.changeView('input');">入力画面</a>に移動します。</li>
+        </ol>
+        <h3>その他</h3>
+        <ul>
+          <li>毎月のシートは手動で増やしてください。入力と支出一覧は現在の月が適用されます。</li>
+          <li>Googleとの認証が切れた場合は自動的に認証画面にリダイレクトしますが、
+          うまく動かない場合は<a href="./auth.pl">こちら</a>から再認証してください。</li>
+        </ul>
+
+      </div>
     </div>
+    <!-- /help -->
 
-    <div id="detailView">
+
+    <!-- setting -->
+    <div id="settingView" class="view">
+      <h2>設定画面</h2>
+      <div class="content">
+        <h3>シートのURL: </h3>
+        <p><input type="text" name="sheetKeyInput" id="sheetKeyInput" value=""></p>
+        <p><button type="submit" id="setSheetKeyButton" class="button">URLからスプレッドシートのkeyを取得</button></p>
+        <h3>保存されたシートのキー:</h3>
+        <p id="sheetKey">未設定</p>
+      </div>
+    </div>
+    <!-- /setting -->
+
+    <!-- detail -->
+    <div id="detailView" class="view">
       <h2>支出一覧画面</h2>
       <p><button type="button" id="loadJSONButton" class="button">データを読み込む</button></p>
       <table id="expensesTable">
@@ -67,8 +92,10 @@
         <tr id="expensesTotal"><th>支出合計</th><td></td></tr>
       </table>
     </div>
+    <!-- /detail -->
 
-    <div id="inputView">
+    <!-- input -->
+    <div id="inputView" class="view">
       <h2>入力画面</h2>
       <div>
         <label for="date" id="dateLabel">日付: </label>
@@ -88,11 +115,15 @@
           <option value="medical">医療費</option>
           <option value="housing">住宅費</option>
           <option value="saving">貯蓄</option>
-          <option value="etc">etc</option>
+          <option value="etc">その他</option>
         </select>
       </div>
       <p><label for="memo">メモ</label><input type="text" name="memo" id="memo"></p>
       <p><button type="submit" id="addButton" class="button">登録</button></p>
     </div>
+    <!-- /input -->
+
+    <div id="footer">developed by @tanabe</div>
+
   </body>
 </html>

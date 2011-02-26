@@ -10,6 +10,10 @@ use Net::Google::AuthSub;
 use Net::Google::Spreadsheets;
 use JSON;
 
+if ($ENV{'REQUEST_METHOD'} eq 'GET') {
+  exit;
+}
+
 sub print_error {
   print '{result: "error"}';
 }
