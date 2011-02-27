@@ -10,6 +10,9 @@ use Net::Google::AuthSub;
 use Net::Google::Spreadsheets;
 use JSON;
 
+print "Content-type: text/html;charset=utf-8\n\n";
+#print "Content-type: application/json;charset=utf-8\n\n";
+
 #check referer
 if ($ENV{'HTTP_REFERER'} !~ /(kakeibo\.kaihatsubu\.com|\.localhost\/kakeibo-kun)\/$/) {
   exit;
@@ -23,9 +26,6 @@ if ($ENV{'REQUEST_METHOD'} eq 'GET') {
 sub print_error {
   print '{result: "error"}';
 }
-
-print "Content-type: text/html;charset=utf-8\n\n";
-#print "Content-type: application/json;charset=utf-8\n\n";
 
 my %cookies = fetch CGI::Cookie;
 my $session_token;
