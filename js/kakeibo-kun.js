@@ -5,6 +5,7 @@ var Application = (function() {
   var app = {}; 
   app.TOKEN_COOKIE_KEY = "gtoken";
   app.SHEET_COOKIE_KEY = "sheetKey";
+  app.AUTH_URL = "./auth.pl";
 
   /**
    *  initialize
@@ -23,7 +24,7 @@ var Application = (function() {
     //check google auth token
     if (!this.getGoogleToken()) {
       this.showMessage("Googleの認証画面へリダイレクト中...");
-      location.href = "./auth.pl";
+      location.href = this.AUTH_URL;
     }
 
     //input view form
@@ -140,6 +141,7 @@ var Application = (function() {
 
   /**
    *  load expenses JSON
+   *  this is heavy action
    */
   app.loadExpensesJSON = function() {
     var now = new Date();
@@ -194,67 +196,21 @@ var Application = (function() {
   };
 
   /**
-   *  initialize screen size
-   */
-  app.initScreenSize = function() {
-    var height = $("body").height() - $("h1").height();
-    $("#loadingScreen").css("height", height + "px");
-    $("#messageScreen").css("height", height + "px");
-  };
-
-  /**
-   *  show loading screen
-   */
-  app.showLoadingScreen = function() {
-    this.showMessage("読込中...");
-  };
-
-  /**
-   *  hide loading screen
-   */
-  app.hideLoadingScreen = function() {
-    this.hideMessage();
-  };
-
-  /**
    *  change view
    *  @param view type
    */
   app.changeView = function(view) {
     var views = ["setting", "input", "detail", "help"];
     for (var i = 0; i < views.length; i++) {
-      $("#" + views[i] + "View").hide();
-      //menu item
-      $("ul#menu li." + views[i]).removeClass("current");
+      if (views[i] !== view) {
+        $("#" + views[i] + "View").hide();
+        $("ul#menu li." + views[i]).removeClass("current");
+      } else {
+        $("#" + view + "View").show();
+        $("ul#menu li." + view).addClass("current");
+      }
     }
-    //menu item
-    $("ul#menu li." + view).addClass("current");
-    var viewId = "#" + view + "View";
-    $(viewId).show();
   };
-
-  /**
-   *  capitalize
-   *  @param target string
-   *  @return capitalized string
-   */
-  app.capitalize = function(target) {
-    return target.replace(/((^|\s)+)(\w+)/ig, function() {
-        return arguments[1] + arguments[3].substring(0, 1).toUpperCase() + arguments[3].substring(1);
-    });     
-  };
-
-  /**
-   *  number to currency
-   *  @param target 
-   *  @return currency
-   *  @see http://webdev.seesaa.net/article/22769178.html
-   */
-  app.toCurrency = function(target) {
-    var result = new String(target).replace(/,/g, "");
-    while (result != (result = result.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
-    return result;
-  }
 
   /**
    *  initialize input form
@@ -278,6 +234,15 @@ var Application = (function() {
   };
 
   /**
+   *  initialize screen size
+   */
+  app.initScreenSize = function() {
+    var height = $("body").height() - $("h1").height();
+    $("#loadingScreen").css("height", height + "px");
+    $("#messageScreen").css("height", height + "px");
+  };
+
+  /**
    *  show message screen
    *  @message message
    */
@@ -293,6 +258,43 @@ var Application = (function() {
   app.hideMessage = function() {
     $("#messageScreen").hide();
   };
+
+  /**
+   *  show loading screen
+   */
+  app.showLoadingScreen = function() {
+    this.showMessage("読込中...");
+  };
+
+  /**
+   *  hide loading screen
+   */
+  app.hideLoadingScreen = function() {
+    this.hideMessage();
+  };
+
+  /**
+   *  capitalize [util function]
+   *  @param target string
+   *  @return capitalized string
+   */
+  app.capitalize = function(target) {
+    return target.replace(/((^|\s)+)(\w+)/ig, function() {
+        return arguments[1] + arguments[3].substring(0, 1).toUpperCase() + arguments[3].substring(1);
+    });     
+  };
+
+  /**
+   *  number to currency [util function]
+   *  @param target 
+   *  @return currency
+   *  @see http://webdev.seesaa.net/article/22769178.html
+   */
+  app.toCurrency = function(target) {
+    var result = new String(target).replace(/,/g, "");
+    while (result != (result = result.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
+    return result;
+  }
 
   /**
    *  Cookie Utility
