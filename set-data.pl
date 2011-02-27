@@ -11,7 +11,7 @@ use Net::Google::Spreadsheets;
 use JSON;
 
 #check referer
-if ($ENV{'HTTP_REFERER'} !~ /(\kakeibo\.kaihatsubu\.com|\.localhost\/kakeibo-kun)\/$/) {
+if ($ENV{'HTTP_REFERER'} !~ /(kakeibo\.kaihatsubu\.com|\.localhost\/kakeibo-kun)\/$/) {
   exit;
 }
 
