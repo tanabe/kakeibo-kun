@@ -77,6 +77,14 @@ ul#menu li.current a {
   color: white;
 }
 
+ul#menu li.disabled {
+  background-color: #ccc;
+}
+
+ul#menu li.disabled a {
+  color: white;
+}
+
 /* views */
 div.view {
   display: none;
@@ -160,13 +168,13 @@ table#expensesTable tr#expensesTotal td {
   width: 80%;
 }
 
-p#sheetKey {
+p.authInfo {
   word-break: break-all;
   padding: 5px;
   border: 2px solid #bcf;
 }
 
-p#sheetKey.unset {
+p.authInfo.unset {
   border: 2px solid red;
 }
 

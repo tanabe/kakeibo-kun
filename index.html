@@ -38,10 +38,10 @@
 
     <!-- menu -->
     <ul id="menu">
-      <li class="input"><a href="javascript:Application.changeView('input')">入力</a></li>
-      <li class="detail"><a href="javascript:Application.changeView('detail')">支出一覧</a></li>
-      <li class="setting"><a href="javascript:Application.changeView('setting')">設定</a></li>
-      <li class="help"><a href="javascript:Application.changeView('help')">ヘルプ</a></li>
+      <li class="input"><a href="javascript:void(null);" class="input">入力</a></li>
+      <li class="detail"><a href="javascript:void(null);" class="detail">支出一覧</a></li>
+      <li class="setting"><a href="javascript:void(null);" class="setting">設定</a></li>
+      <li class="help"><a href="javascript:void(null);" class="help">ヘルプ</a></li>
     </ul>
     <!-- /menu -->
 
@@ -137,13 +137,18 @@
 
         <div class="section">
           <h3>保存されているシートのキー:</h3>
-          <p id="sheetKey"></p>
+          <p id="sheetKey" class="authInfo"></p>
         </div>
 
         <div class="section">
           <h3>シートのURL: </h3>
           <p><input type="text" name="sheetKeyInput" id="sheetKeyInput" value=""></p>
           <p><button type="button" id="setSheetKeyButton" class="button">シートのキーを設定する</button></p>
+        </div>
+
+        <div class="section">
+          <h3>Google認証:</h3>
+          <p id="googleAuth" class="authInfo"></p>
         </div>
 
         <div class="section">

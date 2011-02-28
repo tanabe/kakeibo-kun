@@ -6,6 +6,7 @@ var Application = (function() {
   app.TOKEN_COOKIE_KEY = "gtoken";
   app.SHEET_COOKIE_KEY = "sheetKey";
   app.AUTH_URL = "./auth.pl";
+  app.VIEWS = ["input", "detail", "setting", "help"];
 
   /**
    *  initialize
@@ -27,6 +28,36 @@ var Application = (function() {
       location.href = this.AUTH_URL;
     }
 
+    //initialize input view
+    this.initInputView();
+
+    //initialize detail view
+    this.initDetailView();
+
+    //initialize setting view
+    this.initSettingView();
+
+    //initialize menu
+    this.initMenu();
+  };
+
+  /**
+   *  initialize detail view
+   */
+  app.initDetailView = function() {
+    var self = this;
+    //detail view load button
+    $("#loadJSONButton").click(function() {
+      self.loadExpensesJSON();
+    });
+  };
+
+  /**
+   *  initialize input view
+   */
+  app.initInputView = function() {
+    var self = this;
+
     //input view form
     this.initInputForm();
 
@@ -38,20 +69,22 @@ var Application = (function() {
         alert("入力された金額が正しくありません");
       }
     });
+  };
 
-    //detail view load button
-    $("#loadJSONButton").click(function() {
-      self.loadExpensesJSON();
-    });
+  /**
+   *  initialize setting view
+   */
+  app.initSettingView = function() {
+    var self = this;
 
-    //setting view
-    this.initSheetKeyInput();
+    this.initAuthInfo();
     $("#setSheetKeyButton").click(function(elem) {
       var pattern = /\?key=([^&]+)/;
       if (pattern.test($("#sheetKeyInput").val())) {
         var spreadSheetKey = $("#sheetKeyInput").val().match(/\?key=([^&]+)/)[1];
         self.setSpreadSheetKey(spreadSheetKey);
-        self.initSheetKeyInput();
+        self.initAuthInfo();
+        self.initMenu();
       } else {
         alert("URLが正しくありません");
       }
@@ -64,12 +97,37 @@ var Application = (function() {
   };
 
   /**
+   *  initialize menu
+   */
+  app.initMenu = function() {
+    var self = this;
+    for (var i = 0; i < this.VIEWS.length; i++) {
+      var menuItem = $("ul#menu li." + this.VIEWS[i]);
+      var menuLink = $("ul#menu li a." + this.VIEWS[i]);
+      menuItem.removeClass("disabled");
+      menuLink.click(function(event) {
+        var viewName = $(event.target).attr("class");
+        self.changeView(viewName);
+        return false;
+      });
+    }
+
+    if (!this.getGoogleToken() || !this.getSpreadSheetKey()) {
+      $("ul#menu li." + "input").addClass("disabled");
+      $("ul#menu li." + "input a").unbind("click");
+      $("ul#menu li." + "detail").addClass("disabled");
+      $("ul#menu li." + "detail a").unbind("click");
+    }
+  };
+
+  /**
    *  reset setting
    */
   app.resetSettings = function() {
     this.setSpreadSheetKey("");
     this.setGoogleToken("");
-    this.initSheetKeyInput();
+    this.initAuthInfo();
+    this.initMenu();
   };
 
   /**
@@ -85,15 +143,26 @@ var Application = (function() {
   };
 
   /**
-   *  initialize sheet key input area
+   *  initialize auth information
    */
-  app.initSheetKeyInput = function() {
+  app.initAuthInfo = function() {
+    //sheet key info
     var element = $("#sheetKey");
     if (this.getSpreadSheetKey()) {
       element.text(this.getSpreadSheetKey());
       element.removeClass("unset");
     } else {
       element.text("シートのキーが未設定です。");
+      element.addClass("unset");
+    }
+
+    //google auth info
+    var element = $("#googleAuth");
+    if (this.getGoogleToken()) {
+      element.text("認証済み");
+      element.removeClass("unset");
+    } else {
+      element.text("未認証です。");
       element.addClass("unset");
     }
   }
@@ -200,11 +269,10 @@ var Application = (function() {
    *  @param view type
    */
   app.changeView = function(view) {
-    var views = ["setting", "input", "detail", "help"];
-    for (var i = 0; i < views.length; i++) {
-      if (views[i] !== view) {
-        $("#" + views[i] + "View").hide();
-        $("ul#menu li." + views[i]).removeClass("current");
+    for (var i = 0; i < this.VIEWS.length; i++) {
+      if (this.VIEWS[i] !== view) {
+        $("#" + this.VIEWS[i] + "View").hide();
+        $("ul#menu li." + this.VIEWS[i]).removeClass("current");
       } else {
         $("#" + view + "View").show();
         $("ul#menu li." + view).addClass("current");
