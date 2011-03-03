@@ -237,8 +237,9 @@ var Application = (function() {
     var month = ((101 + now.getMonth()) + "").substr(1, 2);
     var self = this;
     this.showMessage("送信中...");
+    var date = $("#dateSelector").val().length === 1 ? "0" + $("#dateSelector").val() : $("#dateSelector").val();
     $.post("./set-data.pl", {
-        date: year + month + $("#dateSelector").val(),
+        date: year + month + date,
         category: $("#categorySelector").val(),
         out: $("#amount").val(),
         memo: $("#memo").val()
